@@ -3101,7 +3101,15 @@ namespace WingProcedural
                     UIUtility.ConfigureStyles();
                 }
 
-                UIUtility.uiRectWindowEditor = GUILayout.Window(GetInstanceID(), UIUtility.uiRectWindowEditor, OnWindow, GetWindowTitle(), UIUtility.uiStyleWindow, GUILayout.Height(HighLogic.CurrentGame.Parameters.CustomParams<WPSettings>().uiAdjustWindow ? 0 : UIUtility.uiRectWindowEditor.height));
+                UIUtility.uiRectWindowEditor =
+                    ClickThruBlockerProxy.GUILayoutWindowOrFallback(
+                        GetInstanceID(),
+                        ref UIUtility.uiRectWindowEditor,
+                        OnWindow,
+                        GetWindowTitle(),
+                        UIUtility.uiStyleWindow,
+                        GUILayout.Height(HighLogic.CurrentGame.Parameters.CustomParams<WPSettings>().uiAdjustWindow ? 0 : UIUtility.uiRectWindowEditor.height));
+
                 HighLogic.CurrentGame.Parameters.CustomParams<WPSettings>().uiAdjustWindow = false;
 
                 // Thanks to ferram4
@@ -4054,7 +4062,7 @@ namespace WingProcedural
         /// <summary>
         /// How sensitive the mouse is
         /// </summary>
-        float MouseSensitivity => (float)HighLogic.CurrentGame.Parameters.CustomParams<WPSettings>().mouseSensitivity;
+        float MouseSensitivity => (float)HighLogic.CurrentGame.Parameters.CustomParams<WPSensitivity>().mouseSensitivity;
 
         private void UpdateHandleGizmos()
         {
