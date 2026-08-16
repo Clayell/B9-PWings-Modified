@@ -58,7 +58,7 @@ namespace WingProcedural
 
 
 
-    public class WPSensitivity : GameParameters.CustomParameterNode
+    public class WPSettings : GameParameters.CustomParameterNode
     {
         public override string Title { get { return "Controls"; } }
         public override GameParameters.GameMode GameMode { get { return GameParameters.GameMode.ANY; } }
